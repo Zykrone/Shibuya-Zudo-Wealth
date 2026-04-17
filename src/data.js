@@ -375,7 +375,7 @@ export const WL_SECTIONS = [
 export const SUBSCRIPTIONS = [
   {
     id: 'silver', tier: 'ENTRY', name: 'SILVER INVEST', 
-    price: '19,99', colorClass: 'silver',
+    price: '14,99', oldPrice: '19,99€', discount: '-25%', colorClass: 'silver',
     image: '/badges/silver.png',
     featured: false,
     label: 'ABONNEMENT MENSUEL',
@@ -389,7 +389,7 @@ export const SUBSCRIPTIONS = [
   },
   {
     id: 'gold', tier: 'STANDARD+', name: 'GOLD INVEST', 
-    price: '39,99', colorClass: 'gold',
+    price: '29,99', oldPrice: '39,99€', discount: '-25%', colorClass: 'gold',
     image: '/badges/gold.png',
     featured: true,
     label: 'ABONNEMENT MENSUEL',
@@ -403,7 +403,7 @@ export const SUBSCRIPTIONS = [
   },
   {
     id: 'platinum', tier: 'CORE', name: 'PLATINUM INVEST', 
-    price: '59,99', colorClass: 'platinum',
+    price: '44,99', oldPrice: '59,99€', discount: '-25%', colorClass: 'platinum',
     image: '/badges/plat.png',
     featured: false,
     label: 'ABONNEMENT MENSUEL',
@@ -420,7 +420,7 @@ export const SUBSCRIPTIONS = [
   },
   {
     id: 'diamond', tier: 'ROYAL+', name: 'DIAMOND INVEST', 
-    price: '99,99', colorClass: 'diamond',
+    price: '74,99', oldPrice: '99,99€', discount: '-25%', colorClass: 'diamond',
     image: '/badges/diams.png',
     featured: false,
     label: 'ABONNEMENT MENSUEL',
@@ -438,7 +438,7 @@ export const SUBSCRIPTIONS = [
   },
   {
     id: 'ruby', tier: 'RUBY', name: 'RUBY INVEST', 
-    price: '199,99', colorClass: 'ruby',
+    price: '149,99', oldPrice: '199,99€', discount: '-25%', colorClass: 'ruby',
     image: '/badges/ruby.png',
     featured: false,
     subtitle: '(LIMITED, CROWN+)',
@@ -457,7 +457,7 @@ export const SUBSCRIPTIONS = [
   },
   {
     id: 'opal', tier: 'OPAL', name: 'OPAL INVEST', 
-    price: '499,99', colorClass: 'opal',
+    price: '299,99', oldPrice: '399,99€', discount: '-25%', colorClass: 'opal',
     image: '/badges/opal.png',
     featured: false,
     subtitle: '(LIMITED, BOT = BOT+)',

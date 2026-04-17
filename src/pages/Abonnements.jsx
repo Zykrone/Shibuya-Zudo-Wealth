@@ -20,7 +20,7 @@ const SubCard = ({ sub, delay = 0 }) => {
       <div className="sub-badge-header">
         {sub.image && <img src={sub.image} alt={sub.name} className="sub-badge-img" />}
         {sub.discount && (
-          <div className="discount-tag" style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 10 }}>
+          <div className="discount-badge">
             {sub.discount}
           </div>
         )}
@@ -46,10 +46,17 @@ const SubCard = ({ sub, delay = 0 }) => {
           </div>
         )}
         
-        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.6rem', marginTop: '2rem' }}>
-          {sub.oldPrice && <span className="old-price" style={{ fontSize: '1.1rem' }}>{sub.oldPrice}</span>}
-          <span className="sub-price" style={{ color: 'var(--cyan)', fontSize: '3rem', fontWeight: 900 }}>{sub.price}</span>
-          <span className="sub-price-unit" style={{ color: 'var(--text-secondary)', fontWeight: 800, fontSize: '0.9rem' }}>€ / MOIS</span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+          {sub.oldPrice && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', opacity: 0.5 }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Avant</span>
+              <span className="old-price" style={{ fontSize: '1.2rem', textDecoration: 'line-through' }}>{sub.oldPrice}</span>
+            </div>
+          )}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem' }}>
+            <span className="sub-price" style={{ color: 'var(--cyan)', fontSize: '3.5rem', fontWeight: 950, lineHeight: 1 }}>{sub.price}</span>
+            <span className="sub-price-unit" style={{ color: 'var(--text-secondary)', fontWeight: 800, fontSize: '0.9rem' }}>€/MOIS</span>
+          </div>
         </div>
 
         <div className="sub-divider" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)', margin: '2rem 0', height: '1px' }} />
@@ -108,7 +115,7 @@ const AbonnementsPage = () => {
             <span>💎</span> INVESTISSEMENTS DE PRESTIGE
           </div>
           <h1 style={{ fontSize: '5rem', textTransform: 'uppercase', letterSpacing: '-px', fontWeight: 950, margin: '1rem 0' }}>
-            Abonnements <span style={{ color: 'var(--cyan)' }}>Wealth</span>
+            Abonnements
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
             Accédez aux strate suprêmes de l'influence. Chaque abonnement est une porte ouverte 
@@ -133,7 +140,7 @@ const AbonnementsPage = () => {
             <table className="price-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left' }}>Grade Wealth</th>
+                  <th style={{ textAlign: 'left' }}>Grade</th>
                   <th>Mensuel</th>
                   <th>WL Clic Droit</th>
                   <th>Usage Rerank</th>
