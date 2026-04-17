@@ -116,7 +116,7 @@ const MusicPlayer = () => {
           </div>
           
           <div style={{ marginTop: '1rem', fontSize: '0.6rem', color: 'var(--violet-light)', textAlign: 'center', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>
-            TRACKS: DRAMATURGY & SPECIALZ (SHIBUYA PLAYLIST)
+            TRACKS: DRAMATURGY, SPECIALZ & VALKYRIE (SHIBUYA PLAYLIST)
           </div>
         </div>
       )}

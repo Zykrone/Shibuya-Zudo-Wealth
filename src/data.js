@@ -214,6 +214,7 @@ export const WL_SECTIONS = [
         desc: "Version système avec suppression des laisses/fistons/typeus.",
         features: [
           '/fiston - rename Z (rename=ban), si la cible rename elle est ban',
+          '✦ Droit de supprimer les laisses, les fistons et les tipeus des autres',
         ],
         price: '325 €',
       },
@@ -446,7 +447,7 @@ export const SUBSCRIPTIONS = [
       'Limite augmentee +2 (dog-add)',
       'Role @Acces 👑 (chat-owner, vocaux owner, reunions owner)',
     ],
-    cmds: ['/protect-salon', '/rerank', '/gift (3/jour)', '/protect-role', '/affichage', '/aide'],
+    cmds: ['/protect-salon', '/rerank (3/jour)', '/gift (3/jour)', '/protect-role', '/affichage', '/aide'],
   },
   {
     id: 'ruby', tier: 'RUBY', name: 'RUBY INVEST', 

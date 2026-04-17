@@ -1,61 +1,127 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { WL_SECTIONS } from '../data';
+import { useDiscount } from '../context/DiscountContext';
+import { calculateWLPrice } from '../utils/pricing';
 
 const WLCard = ({ card, delay = 0 }) => {
-  const hasFeatures = card.features && card.features.length > 0;
+  const { discounts } = useDiscount();
+  const pricing = calculateWLPrice(card, discounts);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const cardEl = cardRef.current;
+    if (!cardEl) return;
+
+    const handleMouseMove = (e) => {
+      const rect = cardEl.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      cardEl.style.setProperty('--mouse-x', `${x}%`);
+      cardEl.style.setProperty('--mouse-y', `${y}%`);
+    };
+
+    cardEl.addEventListener('mousemove', handleMouseMove);
+    return () => cardEl.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className={`wl-card cursed-card`} style={{ 
-      animationDelay: `${delay}s`, 
-      padding: hasFeatures ? '2.5rem' : '1.8rem 2.5rem',
-      height: '100%',
-      borderRadius: '24px',
-      margin: 0
-    }}>
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        {card.req && (
-          <div style={{ marginBottom: hasFeatures ? '1.5rem' : '1rem' }}>
-            <span style={{ 
-              padding: '0.4rem 1rem', borderRadius: '12px', 
-              background: 'rgba(6, 182, 212, 0.1)', color: 'var(--cyan)', 
-              border: '1px solid rgba(6, 182, 212, 0.2)', fontSize: '0.7rem', fontWeight: 900,
-              textTransform: 'uppercase', letterSpacing: '1px'
-            }}>
-              Pré-requis: {card.req}
+    <div 
+      ref={cardRef}
+      className="wl-card-modern" 
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {/* Badge pré-requis flottant */}
+      {card.req && (
+        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10 }}>
+          <span style={{
+            padding: '0.4rem 1rem', borderRadius: '100px',
+            background: 'rgba(6,182,212,0.1)', color: 'var(--cyan)',
+            border: '1px solid rgba(6,182,212,0.3)', fontSize: '0.6rem', fontWeight: 950,
+            textTransform: 'uppercase', letterSpacing: '2px', backdropFilter: 'blur(5px)'
+          }}>
+            REQUIS : {card.req}
+          </span>
+        </div>
+      )}
+
+      {/* Titre & Desc */}
+      <div style={{ marginBottom: '2.5rem' }}>
+        <h3 style={{
+          color: '#fff', fontSize: '2rem', fontWeight: 950,
+          marginBottom: '0.8rem', letterSpacing: '-1px', textTransform: 'uppercase',
+          lineHeight: 1
+        }}>
+          {card.name}
+        </h3>
+        <p style={{
+          color: 'rgba(255,255,255,0.4)', fontSize: '0.95rem',
+          lineHeight: 1.6, fontWeight: 500
+        }}>
+          {card.desc}
+        </p>
+      </div>
+
+      {/* Features List as Cyber-Pills */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {card.features.map((f, i) => {
+          const isWarning = f.startsWith('⚠️');
+          const fullText = f.replace('☐ ', '').replace('⚠️ ', '');
+          
+          let cmdPart = "";
+          let descPart = fullText;
+          if (fullText.includes(' - ')) {
+            [cmdPart, descPart] = fullText.split(' - ');
+          } else if (fullText.startsWith('/')) {
+            const firstSpace = fullText.indexOf(' ');
+            if (firstSpace !== -1) {
+              cmdPart = fullText.substring(0, firstSpace);
+              descPart = fullText.substring(firstSpace + 1);
+            }
+          }
+
+          return (
+            <div key={i} className={`cyber-pill ${isWarning ? 'warning' : ''}`}>
+              <div className="pill-icon" />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {cmdPart ? (
+                  <>
+                    <span style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 900, fontFamily: 'monospace' }}>
+                      {cmdPart}
+                    </span>
+                    <span style={{ color: isWarning ? 'var(--cyan)' : 'rgba(255,255,255,0.4)', fontSize: '0.75rem', fontWeight: 600 }}>
+                      {descPart}
+                    </span>
+                  </>
+                ) : (
+                  <span style={{ color: isWarning ? 'var(--cyan)' : '#fff', fontSize: '0.9rem', fontWeight: 700 }}>
+                    {descPart}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Modern Price Tag */}
+      <div className="modern-price-tag">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+          {pricing.hasDiscount && (
+            <span style={{ textDecoration: 'line-through', opacity: 0.3, fontSize: '1.2rem', color: '#fff', fontWeight: 800 }}>
+              {pricing.original}
             </span>
+          )}
+          <div className="price-glow-btn">
+            {pricing.final}
           </div>
-        )}
-
-        <h3 style={{ color: '#fff', fontSize: '1.8rem', fontWeight: 900, marginBottom: hasFeatures ? '1rem' : '0.5rem', letterSpacing: '-0.5px' }}>{card.name}</h3>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: hasFeatures ? '2rem' : '1.5rem' }}>{card.desc}</p>
-
-        {hasFeatures && (
-          <ul style={{ listStyle: 'none', padding: 0, marginBottom: '2.5rem' }}>
-            {card.features.map((f, i) => {
-              const isWarning = f.startsWith('⚠️');
-              return (
-                <li key={i} style={{
-                  color: isWarning ? 'var(--cyan)' : 'var(--text-main)',
-                  background: isWarning ? 'rgba(6, 182, 212, 0.05)' : 'transparent',
-                  borderRadius: isWarning ? '16px' : 0,
-                  padding: isWarning ? '1rem' : '0.4rem 0',
-                  fontSize: isWarning ? '0.85rem' : '0.95rem',
-                  display: 'flex', alignItems: 'flex-start', gap: '0.75rem',
-                  border: isWarning ? '1px solid rgba(6, 182, 212, 0.1)' : 'none',
-                  marginTop: isWarning ? '1.5rem' : 0,
-                  fontWeight: isWarning ? 700 : 400
-                }}>
-                  <span style={{ color: 'var(--cyan)', fontSize: '1.1rem' }}>✦</span>
-                  <span style={{ lineHeight: 1.4 }}>{f.replace('☐ ', '').replace('⚠️ ', '')}</span>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-
-        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.03)', paddingTop: hasFeatures ? '2.5rem' : '1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className="wl-price-tag" style={{ fontSize: hasFeatures ? '2.2rem' : '1.8rem', padding: hasFeatures ? '1rem 2.5rem' : '0.8rem 2rem' }}>
-            {card.price}
-          </div>
+          {pricing.hasDiscount && (
+            <span style={{
+              background: 'var(--cyan)', color: '#000', padding: '0.3rem 0.8rem',
+              borderRadius: '8px', fontSize: '0.75rem', fontWeight: 950, marginTop: '0.5rem'
+            }}>
+              OFFRE LIMITÉE -{pricing.discountPercent}%
+            </span>
+          )}
         </div>
       </div>
     </div>
@@ -66,33 +132,59 @@ const WhitelistPage = () => (
   <div className="page-wrapper">
     <div className="page-bg" />
     <div className="container">
-      <div className="page-hero" style={{ textAlign: 'center', marginBottom: '6rem', paddingTop: '4rem' }}>
-        <div className="hero-eyebrow">
-          <span>🛠️</span> Arsenal de l'Empire
+
+      <div className="page-hero" style={{ textAlign: 'center', marginBottom: '8rem', paddingTop: '6rem' }}>
+        <div className="hero-eyebrow" style={{ background: 'rgba(6,182,212,0.1)', color: 'var(--cyan)', borderColor: 'rgba(6,182,212,0.3)' }}>
+          <span>🛠️</span> ARSENAL DE L'EMPIRE
         </div>
-        <h1>Whitelist</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
-          Optimisez votre influence avec des privilèges techniques de pointe. 
-          Des outils de modération aux accès vocaux exclusifs.
+        <h1 className="abonnements-title" style={{ fontSize: '7rem', margin: '1rem 0 2.5rem' }}>
+          WHITELIST
+        </h1>
+        <p style={{
+          color: 'rgba(255,255,255,0.5)', fontSize: '1.3rem',
+          maxWidth: '800px', margin: '0 auto', lineHeight: 1.8, fontWeight: 500
+        }}>
+          Dominez le système avec des privilèges de pointe. 
+          Une suite d'outils d'élite pour une autorité absolue.
         </p>
       </div>
 
       {WL_SECTIONS.map((section) => (
-        <div key={section.id} style={{ marginBottom: '8rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '3rem' }}>
-            <div className="section-icon-container">
+        <div key={section.id} style={{ marginBottom: '12rem' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '2rem',
+            marginBottom: '4rem', paddingBottom: '2.5rem',
+            borderBottom: '1px solid rgba(255,255,255,0.05)'
+          }}>
+            <div style={{
+              width: '70px', height: '70px', borderRadius: '24px',
+              background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '2rem', flexShrink: 0,
+              boxShadow: '0 0 30px rgba(124,58,237,0.2)'
+            }}>
               {section.icon}
             </div>
             <div>
-              <h2 className="jjk-heading" style={{ fontSize: '2.5rem', margin: 0 }}>{section.title}</h2>
-              <p style={{ color: 'var(--violet-light)', opacity: 0.8, fontSize: '1rem', marginTop: '0.5rem' }}>{section.desc}</p>
+              <h2 style={{
+                fontSize: '2.5rem', fontWeight: 950, color: '#fff',
+                textTransform: 'uppercase', letterSpacing: '-1px', margin: 0,
+              }}>
+                {section.title}
+              </h2>
+              <p style={{
+                color: 'var(--violet-light)', fontSize: '1.1rem',
+                marginTop: '0.5rem', fontWeight: 700, opacity: 0.7
+              }}>
+                {section.desc}
+              </p>
             </div>
           </div>
 
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-            gap: '1rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', 
+            gap: '2.5rem',
           }}>
             {section.cards.map((card, i) => (
               <WLCard key={card.name} card={card} delay={i * 0.1} />
@@ -101,7 +193,7 @@ const WhitelistPage = () => (
         </div>
       ))}
 
-      <div style={{ height: '6rem' }} />
+      <div style={{ height: '10rem' }} />
     </div>
   </div>
 );

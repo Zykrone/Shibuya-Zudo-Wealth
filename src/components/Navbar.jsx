@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { id: 'abonnements', label: 'Abonnements' },
 ];
 
-const Navbar = ({ currentPage, setPage }) => {
+const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Navbar = ({ currentPage, setPage }) => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-brand jjk-heading" onClick={() => setPage('home')} style={{ cursor: 'pointer' }}>
+      <div className="navbar-brand jjk-heading" onClick={triggerDomainExpansion} style={{ cursor: 'pointer' }}>
         <span style={{ fontSize: '1.4rem' }}>
           SHIBUYA ZUDO
         </span>

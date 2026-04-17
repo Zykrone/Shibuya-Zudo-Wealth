@@ -310,8 +310,17 @@ body::before {
 .shatter-overlay {
   position: fixed; inset: 0; z-index: 100; pointer-events: none;
 }
-.shattering .splash-content-luxe, .shattering .parallax-layer {
+.shattering .splash-content-luxe, .shattering .parallax-layer, .shattering-app {
   animation: shakeHeavy 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Cache le contenu visible dès le début de l'animation de shatter */
+.shattering .splash-bg-overlay,
+.shattering .parallax-kanji,
+.shattering .splash-particles,
+.shattering .splash-content-luxe {
+  opacity: 0;
+  transition: opacity 0.15s ease 0.4s;
 }
 
 @keyframes shakeHeavy {
@@ -340,19 +349,19 @@ body::before {
 
 @keyframes sliceTop {
   0% { transform: translateY(0); opacity: 1; }
-  40% { transform: translateY(0); opacity: 1; filter: invert(1); }
-  100% { transform: translateY(-100vh) rotate(-5deg); opacity: 1; }
+  35% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(-3deg); opacity: 1; }
 }
 @keyframes sliceBot {
   0% { transform: translateY(0); opacity: 1; }
-  40% { transform: translateY(0); opacity: 1; filter: invert(1); }
-  100% { transform: translateY(100vh) rotate(5deg); opacity: 1; }
+  35% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(3deg); opacity: 1; }
 }
 @keyframes flashWhite {
   0% { opacity: 0; }
-  10% { opacity: 1; }
-  20% { opacity: 0; }
-  30% { opacity: 1; }
+  8% { opacity: 1; }
+  18% { opacity: 0; }
+  28% { opacity: 0.8; }
   100% { opacity: 0; }
 }
 

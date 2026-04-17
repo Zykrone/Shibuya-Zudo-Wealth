@@ -15,11 +15,11 @@ const RolesPage = () => {
           <div className="hero-eyebrow" style={{ animationDelay: '0s' }}>
             <span>⚔️</span> AUTORITÉ & PRIVILÈGES
           </div>
-          <h1 style={{ fontSize: '5rem', textTransform: 'uppercase', letterSpacing: '-2px', fontWeight: 950, margin: '1rem 0' }}>
-            Catalogue des <span style={{ color: 'var(--cyan)' }}>Rôles</span>
+          <h1 className="white-glow" style={{ fontSize: '5rem', letterSpacing: '-2px', margin: '1rem 0 2rem' }}>
+            Catalogue des Rôles
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
-            Découvrez l'ensemble de la hiérarchie Shibuya Zudo Wealth. 
+          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.2rem', maxWidth: '750px', margin: '0 auto', lineHeight: 1.7, fontWeight: 500 }}>
+            Découvrez l’ensemble de la hiérarchie Shibuya Zudo Wealth.
             Chaque rang débloque des commandes système et des accès exclusifs.
           </p>
         </div>
@@ -37,8 +37,10 @@ const RolesPage = () => {
         {/* Recap Tableau Poli */}
         <div style={{ marginTop: '10rem', paddingBottom: '10rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase' }}>Grades <span style={{ color: 'var(--violet-light)' }}>Investissement</span></h2>
-            <p style={{ color: 'var(--text-muted)' }}>Récapitulatif des coûts uniques d'acquisition.</p>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 950, textTransform: 'uppercase', color: '#fff', letterSpacing: '-1px' }}>
+              Grades <span style={{ color: 'var(--violet-light)' }}>Investissement</span>
+            </h2>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Récapitulatif des coûts uniques d’acquisition.</p>
           </div>
 
           <div className="price-table-wrap">

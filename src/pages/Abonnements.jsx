@@ -122,12 +122,12 @@ const AbonnementsPage = () => {
           <div className="hero-eyebrow" style={{ animationDelay: '0s' }}>
             <span>💎</span> INVESTISSEMENTS DE PRESTIGE
           </div>
-          <h1 className="jjk-heading" style={{ fontSize: '5rem', margin: '1rem 0' }}>
-            Abonnements
+          <h1 className="abonnements-title" style={{ margin: '1rem 0 2rem' }}>
+            ABONNEMENTS
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
-            Accédez aux strate suprêmes de l'influence. Chaque abonnement est une porte ouverte 
-            sur des technologies et des permissions exclusives à l'empire.
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto', lineHeight: 1.7, fontWeight: 500 }}>
+            Accédez aux strates suprêmes de l'influence. Chaque abonnement est une
+            porte ouverte sur des technologies et permissions exclusives à l'empire.
           </p>
         </div>
 
@@ -146,43 +146,58 @@ const AbonnementsPage = () => {
         {/* Tableau Comparatif Nettoyé */}
         <div style={{ marginTop: '10rem', paddingBottom: '10rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 className="jjk-heading" style={{ fontSize: '2.5rem' }}>Analyse <span style={{ color: 'var(--violet-light)' }}>Comparative</span></h2>
-            <p style={{ color: 'var(--text-muted)' }}>Mise à jour en temps réel des capacités de chaque grade.</p>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 950, textTransform: 'uppercase', color: '#fff', letterSpacing: '-1px' }}>
+              Analyse <span style={{ color: 'var(--violet-light)' }}>Comparative</span>
+            </h2>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Mise à jour en temps réel des capacités de chaque grade.</p>
           </div>
 
-          <div className="price-table-wrap">
-            <table className="price-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div className="price-table-wrap" style={{ 
+            background: 'rgba(5, 4, 10, 0.6)', 
+            backdropFilter: 'blur(20px)', 
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            borderRadius: '32px',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.5)',
+            overflow: 'hidden'
+          }}>
+            <table className="price-table" style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 8px', padding: '1rem' }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left' }}>Grade</th>
-                  <th>Mensuel</th>
-                  <th>WL Clic Droit</th>
-                  <th>Usage Rerank</th>
-                  <th>Accès</th>
+                  <th style={{ textAlign: 'left', padding: '1.5rem 2rem', color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', letterSpacing: '2px' }}>GRADE</th>
+                  <th style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', letterSpacing: '2px' }}>MENSUEL</th>
+                  <th style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', letterSpacing: '2px' }}>USAGE RERANK</th>
+                  <th style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', letterSpacing: '2px' }}>ACCÈS</th>
                 </tr>
               </thead>
               <tbody>
                 {SUBSCRIPTIONS.map(sub => (
-                  <tr key={sub.id}>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <img src={sub.image} alt="" style={{ width: '80px', height: '32px', objectFit: 'contain' }} />
-                        <span style={{ fontWeight: 900, color: '#fff', fontSize: '1rem' }}>{sub.name}</span>
+                  <tr key={sub.id} className="table-row-premium" style={{ transition: 'all 0.3s ease' }}>
+                    <td style={{ padding: '1.2rem 2rem', borderRadius: '16px 0 0 16px', background: 'rgba(255,255,255,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                        <div style={{ width: '80px', height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', padding: '4px' }}>
+                          <img src={sub.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                        </div>
+                        <span style={{ fontWeight: 950, color: '#fff', fontSize: '1rem', letterSpacing: '1px' }}>{sub.name}</span>
                       </div>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{ color: 'var(--cyan)', fontWeight: 900, fontSize: '1.2rem' }}>{sub.price}€</span>
+                    <td style={{ textAlign: 'center', background: 'rgba(255,255,255,0.02)' }}>
+                      <span style={{ color: 'var(--cyan)', fontWeight: 950, fontSize: '1.3rem', textShadow: '0 0 15px rgba(6,182,212,0.3)' }}>{sub.price}€</span>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{ color: 'var(--violet-light)', fontWeight: 900, fontSize: '1.1rem' }}>
-                        {sub.avantages.find(a => a.includes('+'))?.split('+')[1]?.split(' ')[0] || '—'}
-                      </span>
+                    <td style={{ textAlign: 'center', color: '#fff', fontWeight: 800, background: 'rgba(255,255,255,0.02)' }}>
+                       <span style={{ opacity: 0.9 }}>{sub.cmds.find(c => c.includes('rerank')) || '—'}</span>
                     </td>
-                    <td style={{ textAlign: 'center', color: '#fff', fontWeight: 800 }}>
-                       {sub.cmds.find(c => c.includes('rerank')) || '—'}
-                    </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <button className="btn-detail" onClick={() => scrollToSub(sub.id)} style={{ padding: '0.4rem 1rem', fontSize: '0.7rem' }}>Explorer →</button>
+                    <td style={{ textAlign: 'center', borderRadius: '0 16px 16px 0', background: 'rgba(255,255,255,0.02)' }}>
+                      <button className="btn-detail" onClick={() => scrollToSub(sub.id)} style={{ 
+                        padding: '0.6rem 1.5rem', 
+                        fontSize: '0.7rem', 
+                        borderRadius: '12px',
+                        background: 'rgba(124,58,237,0.1)',
+                        border: '1px solid rgba(124,58,237,0.2)',
+                        color: 'var(--violet-light)',
+                        fontWeight: 900,
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}>EXPLORER ▶</button>
                     </td>
                   </tr>
                 ))}

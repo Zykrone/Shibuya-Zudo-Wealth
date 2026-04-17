@@ -36,7 +36,7 @@ const Particles = () => {
   );
 };
 
-const Splash = () => {
+const Splash = ({ onEnter }) => {
   const [isShattering, setIsShattering] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -65,6 +65,7 @@ const Splash = () => {
     // Attendre la fin de l'animation de déchirure (shatter)
     setTimeout(() => {
       setIsVisible(false);
+      if (onEnter) onEnter();
     }, 2800);
   };
 
@@ -81,13 +82,6 @@ const Splash = () => {
       >
         <VideoBackground videoId="lm47T73ARgI" opacity={0.6} />
         <div className="splash-bg-overlay" />
-      </div>
-
-      <div 
-        className="parallax-layer parallax-kanji"
-        style={{ transform: `translate(${mousePos.x * -3}px, ${mousePos.y * -3}px)` }}
-      >
-        領域展開
       </div>
 
       <Particles />
