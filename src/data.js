@@ -227,8 +227,13 @@ export const WL_SECTIONS = [
     cards: [
       {
         name: 'PACK WL VOCAL', req: null,
-        desc: "Mute clic droit, move et déco WL.",
-        features: [],
+        desc: "Optimisation de la gestion vocale avec des actions rapides clic-droit.",
+        features: [
+          'Mute clic-droit (instantané)',
+          'Move clic-droit (déplacement rapide)',
+          'Déconnexion WL forcée',
+          'Gestion des permissions vocales avancées',
+        ],
         price: '150 €',
       },
       {
@@ -364,9 +369,14 @@ export const WL_SECTIONS = [
         price: '225 €',
       },
       {
-        name: 'SYS JUGE', req: null,
-        desc: "Accès à la justice suprême du serveur.",
-        features: [],
+        name: '🔨 - SYS JUGE', req: null,
+        desc: "Accès à la justice suprême du serveur et protection absolue.",
+        features: [
+          '+unbanall : clear la liste des bannis (cooldown)',
+          'Vous êtes un /protect-user, personne ne peut vous bannir à part un sys+ (univers).',
+          'Permet de ne pas se faire ban quand on touche un user-protect, juste avertissement.',
+          '⚖️ Statut de Juge Infaillible — Décision finale sur les sanctions.',
+        ],
         price: '600 €',
       },
     ],

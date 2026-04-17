@@ -13,7 +13,7 @@ const TIER_LABELS = {
 const SubCard = ({ sub, delay = 0 }) => {
   const meta = TIER_LABELS[sub.colorClass] || {};
   return (
-    <div id={`sub-${sub.id}`} className={`sub-card ${sub.colorClass} ${sub.featured ? 'featured' : ''}`} 
+    <div id={`sub-${sub.id}`} className={`sub-card cursed-card ${sub.colorClass} ${sub.featured ? 'featured' : ''}`} 
          style={{ animationDelay: `${delay}s` }}>
       
       {/* GRAPHIC HEADER - FULL IMAGE DISPLAY */}
@@ -109,7 +109,7 @@ const AbonnementsPage = () => {
           <div className="hero-eyebrow" style={{ animationDelay: '0s' }}>
             <span>💎</span> INVESTISSEMENTS DE PRESTIGE
           </div>
-          <h1 style={{ fontSize: '5rem', textTransform: 'uppercase', letterSpacing: '-px', fontWeight: 950, margin: '1rem 0' }}>
+          <h1 className="jjk-heading" style={{ fontSize: '5rem', margin: '1rem 0' }}>
             Abonnements
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
@@ -127,7 +127,7 @@ const AbonnementsPage = () => {
         {/* Tableau Comparatif Nettoyé */}
         <div style={{ marginTop: '10rem', paddingBottom: '10rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, textTransform: 'uppercase' }}>Analyse <span style={{ color: 'var(--violet-light)' }}>Comparative</span></h2>
+            <h2 className="jjk-heading" style={{ fontSize: '2.5rem' }}>Analyse <span style={{ color: 'var(--violet-light)' }}>Comparative</span></h2>
             <p style={{ color: 'var(--text-muted)' }}>Mise à jour en temps réel des capacités de chaque grade.</p>
           </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ROLES, WL_SECTIONS, SUBSCRIPTIONS } from '../data';
 import RoleCard from '../components/RoleCard';
+import VideoBackground from '../components/VideoBackground';
 
 const Home = ({ setPage }) => {
   const totalRoles = ROLES.filter(r => r.price).length;
@@ -17,42 +18,51 @@ const Home = ({ setPage }) => {
       }}>
         {/* Animated Background Elements */}
         <div style={{ position: 'absolute', inset: 0, zIndex: -1 }}>
-          <div className="page-bg" />
+          <VideoBackground videoId="lm47T73ARgI" opacity={0.4} />
           <div style={{ 
             position: 'absolute', inset: 0, 
-            background: 'radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%)',
-            animation: 'float 8s infinite ease-in-out'
+            background: 'radial-gradient(circle at center, rgba(124, 58, 237, 0.2) 0%, rgba(5,4,10,0.85) 100%)',
           }} />
         </div>
 
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <div className="hero-eyebrow" style={{ animationDelay: '0.2s' }}>
-            <span>⚡</span> L'EMPIRE DE L'INFLUENCE
-          </div>
-          <h1 style={{ 
-            fontSize: '8rem', fontWeight: 950, letterSpacing: '-6px', lineHeight: 0.9,
-            marginBottom: '2rem', textTransform: 'uppercase'
+          <div style={{ 
+            background: 'rgba(5, 4, 10, 0.4)', 
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(124, 58, 237, 0.2)',
+            borderRadius: '40px',
+            padding: '5rem 2rem',
+            maxWidth: '1000px',
+            margin: '0 auto',
+            boxShadow: '0 30px 60px rgba(0,0,0,0.6), inset 0 0 30px rgba(124, 58, 237, 0.1)'
           }}>
-            SHIBUYA ZUDO<br />
-            <span style={{ color: 'var(--cyan)', textShadow: '0 0 50px rgba(6,182,212,0.3)' }}>WEALTH</span>
-          </h1>
-          <p style={{ 
-            color: 'var(--text-secondary)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto 3rem',
-            lineHeight: 1.6, fontWeight: 600
-          }}>
-            L'apogée du prestige. Dominez avec des privilèges absolus et une autorité incontestée. 
-            Découvrez la fusion parfaite entre technologie et influence.
-          </p>
-          <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="btn-primary" onClick={() => setPage('roles')}>
-              Rôles
-            </button>
-            <button className="btn-luxe" style={{ borderColor: 'var(--cyan)', color: 'var(--cyan)' }} onClick={() => setPage('whitelist')}>
-              Whitelist
-            </button>
-            <button className="btn-luxe" onClick={() => setPage('abonnements')}>
-              Abonnements
-            </button>
+            <div className="hero-eyebrow" style={{ animationDelay: '0.2s', marginBottom: '1.5rem', color: 'var(--violet-light)', fontWeight: 900, letterSpacing: '3px' }}>
+              <span style={{ color: 'var(--cyan)' }}>⚡</span> L'EMPIRE DE L'INFLUENCE
+            </div>
+            <h1 className="jjk-heading" style={{ 
+              fontSize: '6.5rem', lineHeight: 0.9, marginBottom: '2rem'
+            }}>
+              SHIBUYA ZUDO<br />
+              <span style={{ color: 'var(--cyan)' }}>WEALTH</span>
+            </h1>
+            <p style={{ 
+              color: 'rgba(255,255,255,0.7)', fontSize: '1.3rem', maxWidth: '750px', margin: '0 auto 3.5rem',
+              lineHeight: 1.6, fontWeight: 500
+            }}>
+              L'apogée du prestige. Dominez avec des privilèges absolus et une autorité incontestée. 
+              Découvrez la fusion parfaite entre technologie et influence.
+            </p>
+            <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button className="btn-primary" onClick={() => setPage('roles')} style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '50px' }}>
+                Explorer les Rôles
+              </button>
+              <button className="btn-primary" onClick={() => setPage('whitelist')} style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '50px' }}>
+                Accès Whitelist
+              </button>
+              <button className="btn-primary" onClick={() => setPage('abonnements')} style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '50px' }}>
+                Nos Abonnements
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -90,8 +100,8 @@ const Home = ({ setPage }) => {
             </p>
             <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn-primary" onClick={() => setPage('roles')}>Rôles</button>
-              <button className="btn-luxe" style={{ borderColor: 'var(--cyan)', color: 'var(--cyan)' }} onClick={() => setPage('whitelist')}>Whitelist</button>
-              <button className="btn-luxe" onClick={() => setPage('abonnements')}>Nos Abonnements</button>
+              <button className="btn-primary" onClick={() => setPage('whitelist')}>Whitelist</button>
+              <button className="btn-primary" onClick={() => setPage('abonnements')}>Nos Abonnements</button>
             </div>
           </div>
         </div>

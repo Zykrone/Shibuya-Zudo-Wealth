@@ -19,8 +19,8 @@ const Navbar = ({ currentPage, setPage }) => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-brand" onClick={() => setPage('home')}>
-        <span style={{ background: 'linear-gradient(90deg, #fff, rgba(255,255,255,0.5))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '1.4rem' }}>
+      <div className="navbar-brand jjk-heading" onClick={() => setPage('home')} style={{ cursor: 'pointer' }}>
+        <span style={{ fontSize: '1.4rem' }}>
           SHIBUYA ZUDO
         </span>
       </div>

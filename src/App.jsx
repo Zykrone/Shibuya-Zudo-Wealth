@@ -36,7 +36,7 @@ function App() {
       <Splash />
       <CurseEnergy />
       {isLoading && <LoadingScreen />}
-      <div className={isLoading ? 'app-content hidden' : 'app-content fade-in'}>
+      <div className={isLoading ? 'app-content hidden' : 'app-content'}>
         <Navbar currentPage={page} setPage={setPage} />
         {renderPage()}
       </div>

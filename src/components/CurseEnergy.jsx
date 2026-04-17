@@ -1,11 +1,12 @@
 import React from 'react';
 
 const CurseEnergy = () => {
-  const particles = [...Array(15)].map((_, i) => ({
+  const particles = [...Array(40)].map((_, i) => ({
     id: i,
     left: `${Math.random() * 100}%`,
-    duration: `${5 + Math.random() * 10}s`,
+    duration: `${3 + Math.random() * 8}s`,
     delay: `${Math.random() * 5}s`,
+    size: `${2 + Math.random() * 6}px`
   }));
 
   return (

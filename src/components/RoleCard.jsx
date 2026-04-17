@@ -98,7 +98,6 @@ const RoleCard = ({ role, delay = 0 }) => {
             
             <div className="modal-footer-luxe">
               <div className="footer-price">{role.price} € <span style={{ fontSize: '0.8rem', opacity: 0.5, fontWeight: 500 }}>PAIEMENT UNIQUE</span></div>
-              <button className="btn-buy-simple">S'APPROPRIER LE RANG</button>
             </div>
           </div>
         </div>
