@@ -475,5 +475,3 @@ export const SUBSCRIPTIONS = [
     cmds: ['/wet', '/gift (5/jour)', '/rerank (5/jour)', '/protect-salon', '/protect-role', '/affichage', '/aide'],
   },
 ];
-
-];
