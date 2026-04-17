@@ -1,53 +1,128 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import VideoBackground from './VideoBackground';
 
+const Particles = () => {
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    const p = Array.from({ length: 60 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${Math.random() * 6 + 4}s`,
+      animationDelay: `${Math.random() * 5}s`,
+      opacity: Math.random() * 0.5 + 0.2,
+      scale: Math.random() * 1.5 + 0.5,
+      isCyan: Math.random() > 0.5
+    }));
+    setParticles(p);
+  }, []);
+
+  return (
+    <div className="splash-particles">
+      {particles.map(p => (
+        <div 
+          key={p.id} 
+          className={`splash-particle ${p.isCyan ? 'cyan' : 'violet'}`}
+          style={{
+            left: p.left,
+            animationDuration: p.animationDuration,
+            animationDelay: p.animationDelay,
+            opacity: p.opacity,
+            transform: `scale(${p.scale})`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Splash = () => {
-  const [isExiting, setIsExiting] = useState(false);
+  const [isShattering, setIsShattering] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [isExpanding, setIsExpanding] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!containerRef.current || isShattering) return;
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      const x = (clientX / innerWidth - 0.5) * 30; // parallax factor
+      const y = (clientY / innerHeight - 0.5) * 30;
+      setMousePos({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isShattering]);
 
   const handleEnter = () => {
-    setIsExpanding(true);
-    // Dispatch global event for music unmuting
+    if (isShattering) return;
+    setIsShattering(true);
+    
+    // Activer l'audio
     window.dispatchEvent(new CustomEvent('shibuya-enter'));
     
+    // Attendre la fin de l'animation de déchirure (shatter)
     setTimeout(() => {
-      setIsExiting(true);
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 1200);
-    }, 800); 
+      setIsVisible(false);
+    }, 2800);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className={`splash-screen ${isExiting ? 'exit' : ''} ${isExpanding ? 'expanding' : ''}`} onClick={handleEnter}>
-      <VideoBackground videoId="lm47T73ARgI" opacity={0.6} />
-      <div className="splash-bg-modern" style={{ background: 'transparent', backgroundImage: 'linear-gradient(rgba(5, 4, 10, 0.6), rgba(5, 4, 10, 0.95))' }} />
-      
-      <div className="splash-content" style={{ gap: '3rem' }}>
-        <div className="splash-logo-container">
-          <h1 className="jjk-heading" style={{ fontSize: '6rem', letterSpacing: '15px', textIndent: '15px', margin: 0, textShadow: '0 0 50px rgba(124, 58, 237, 0.5)' }}>
-            SHIBUYA <span style={{ color: 'var(--cyan)' }}>CONTRIBUTION</span> ZUDO
+    <div 
+      ref={containerRef}
+      className={`splash-screen-luxe ${isShattering ? 'shattering' : ''}`}
+    >
+      <div 
+        className="parallax-layer parallax-bg"
+        style={{ transform: `scale(1.1) translate(${mousePos.x * -1}px, ${mousePos.y * -1}px)` }}
+      >
+        <VideoBackground videoId="lm47T73ARgI" opacity={0.6} />
+        <div className="splash-bg-overlay" />
+      </div>
+
+      <div 
+        className="parallax-layer parallax-kanji"
+        style={{ transform: `translate(${mousePos.x * -3}px, ${mousePos.y * -3}px)` }}
+      >
+        領域展開
+      </div>
+
+      <Particles />
+
+      <div 
+        className="splash-content-luxe"
+        style={{ transform: `translate(${mousePos.x * 1}px, ${mousePos.y * 1}px)` }}
+      >
+        <div className="splash-logo-wrap">
+          <h1 className="splash-title-ultra">
+            <span className="glitch-wrapper" data-text="SHIBUYA">SHIBUYA</span>
+            <span className="text-cyan text-glow"> CONTRIBUTION </span>
+            <span className="glitch-wrapper" data-text="ZUDO">ZUDO</span>
           </h1>
-          <p className="splash-subtitle" style={{ fontSize: '1.1rem', marginTop: '1.5rem', color: 'rgba(255,255,255,0.7)', letterSpacing: '12px' }}>
+          <p className="splash-subtitle-glitch">
             L'EMPIRE DE L'INFLUENCE & DE L'ÉQUILIBRE
           </p>
         </div>
         
-        <div className="enter-btn-wrap">
-          <div className="enter-btn-glow" style={{ inset: '-15px', opacity: 0.6 }} />
-          <button className="enter-btn-modern" style={{ padding: '1.8rem 6rem', fontSize: '1.3rem', border: '2px solid rgba(124, 58, 237, 0.5)', borderRadius: '100px' }}>
-            <span className="btn-text" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>ACCÉDER AU DOMAINE</span>
-            <div className="btn-shimmer" />
+        <div className="enter-btn-wrap-luxe" onClick={handleEnter}>
+          <div className="enter-btn-aura" />
+          <button className="enter-btn-epic">
+            <span className="btn-epic-text">ACCÉDER AU DOMAINE</span>
+            <div className="btn-epic-slash" />
           </button>
         </div>
-        
-        <div className="splash-footer" style={{ marginTop: '4rem', opacity: 0.5 }}>
-          CLIQUEZ POUR DÉVERROUILLER L'ACCÈS
-        </div>
       </div>
+
+      {isShattering && (
+        <div className="shatter-overlay">
+          <div className="shatter-slice-1" />
+          <div className="shatter-slice-2" />
+          <div className="shatter-flash" />
+        </div>
+      )}
     </div>
   );
 };
