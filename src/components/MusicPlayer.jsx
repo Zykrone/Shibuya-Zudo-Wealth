@@ -2,104 +2,89 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.3);
   const [showPopover, setShowPopover] = useState(false);
-  const playerRef = useRef(null);
-  const containerRef = useRef(null);
+  const [isReady, setIsReady] = useState(false);
+  const iframeRef = useRef(null);
+
+  // Playlist: Dramaturgy (Eve) -> SPECIALZ (King Gnu)
+  const playlist = ["Z9KCbu-XXks", "n2THLWjJ3Wo"];
+  const videoId = playlist[0];
+  const playlistParam = playlist.join(',');
+
+  const togglePlay = (e) => {
+    if (e) e.stopPropagation();
+    const command = isPlaying ? 'pauseVideo' : 'playVideo';
+    iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command }), '*');
+    setIsPlaying(!isPlaying);
+    if (isMuted) unmute();
+  };
+
+  const unmute = () => {
+    iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+    setIsMuted(false);
+    setIsPlaying(true);
+  };
+
+  const updateVolume = (val) => {
+    setVolume(val);
+    iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [val * 100] }), '*');
+  };
 
   useEffect(() => {
-    // Load YouTube API script
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = () => {
-      playerRef.current = new window.YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: 'Z9KCbu-XXks',
-        playerVars: {
-          'autoplay': 1,
-          'loop': 1,
-          'playlist': 'Z9KCbu-XXks', // Required for loop
-          'controls': 0,
-          'showinfo': 0,
-          'autohide': 1,
-          'modestbranding': 1,
-          'mute': 0 // We try to play with sound
-        },
-        events: {
-          'onReady': (event) => {
-            event.target.setVolume(volume * 100);
-            // Autoplay might be blocked by browser policy without interaction
-            // But we try nonetheless. If it fails, isPlaying stays false.
-            try {
-              event.target.playVideo();
-              setIsPlaying(true);
-            } catch (e) {
-              console.log("Autoplay blocked");
-            }
-          },
-          'onStateChange': (event) => {
-            if (event.data === window.YT.PlayerState.PLAYING) setIsPlaying(true);
-            if (event.data === window.YT.PlayerState.PAUSED) setIsPlaying(false);
-            if (event.data === window.YT.PlayerState.BUFFERING) setIsPlaying(true);
-          }
-        }
-      });
+    const handleEnter = () => {
+      unmute();
     };
+    window.addEventListener('shibuya-enter', handleEnter);
 
+    const handleMessage = (event) => {
+      if (typeof event.data === 'string') {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.event === 'onReady') {
+            setIsReady(true);
+            updateVolume(volume); // Ensure volume is set to 30% on ready
+          }
+          if (data.event === 'infoDelivery' && data.info && data.info.playerState !== undefined) {
+            if (data.info.playerState === 1) setIsPlaying(true);
+            if (data.info.playerState === 2) setIsPlaying(false);
+          }
+        } catch (e) {}
+      }
+    };
+    window.addEventListener('message', handleMessage);
     return () => {
-      // Cleanup cleanup if needed, but YT API is global
+      window.removeEventListener('shibuya-enter', handleEnter);
+      window.removeEventListener('message', handleMessage);
     };
   }, []);
 
-  useEffect(() => {
-    if (playerRef.current && playerRef.current.setVolume) {
-      playerRef.current.setVolume(volume * 100);
-    }
-  }, [volume]);
-
-  const togglePlay = (e) => {
-    e.stopPropagation();
-    if (!playerRef.current) return;
-
-    if (isPlaying) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
-    }
-    // State is updated by onStateChange event
-  };
-
-  const handleVolumeChange = (e) => {
-    setVolume(parseFloat(e.target.value));
-  };
-
-  const togglePopover = () => {
-    setShowPopover(!showPopover);
-  };
-
   return (
     <div className="music-container">
-      {/* Hidden YouTube Container */}
-      <div id="youtube-player" style={{ position: 'absolute', top: '-1000px', pointerEvents: 'none', opacity: 0 }}></div>
+      <iframe
+        ref={iframeRef}
+        id="yt-player-frame"
+        src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${playlistParam}&controls=0&modestbranding=1&rel=0&origin=${window.location.origin}`}
+        style={{ position: 'absolute', top: '-1000px', left: '-1000px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }}
+        title="Music Player"
+        allow="autoplay; encrypted-media"
+      />
       
-      <div className="music-main-btn" onClick={togglePopover}>
+      <div className="music-main-btn" onClick={() => setShowPopover(!showPopover)}>
         <div className="music-icon-wrap">
           <div className={`music-status-dot ${isPlaying ? 'on' : 'off'}`} />
-          <span className="music-btn-text">MUSIC</span>
-          <span className="music-state-label">{isPlaying ? 'ON' : 'OFF'}</span>
+          <span className="music-btn-text">SYSTÈME AUDIO</span>
+          <span className="music-state-label">{isPlaying ? 'ACTIF' : 'PAUSE'}</span>
         </div>
       </div>
 
       {showPopover && (
-        <div className="music-popover-luxe">
+        <div className="music-popover-luxe" style={{ border: '1px solid var(--violet)' }}>
           <div className="popover-header">
-            <span className="popover-title">Audio Control — Eve</span>
-            <button className="popover-play-btn" onClick={togglePlay}>
-              {isPlaying ? '⏸ PAUSE' : '▶ PLAY'}
+            <span className="popover-title" style={{ color: 'var(--violet-light)' }}>Contrôle de l'Influence</span>
+            <button className="popover-play-btn" onClick={togglePlay} style={{ background: 'var(--violet)' }}>
+              {isPlaying ? '⏸ PAUSE' : '▶ Lancer'}
             </button>
           </div>
 
@@ -110,7 +95,8 @@ const MusicPlayer = () => {
                 className={`vis-bar ${isPlaying ? 'animating' : ''}`} 
                 style={{ 
                   animationDelay: `${i * 0.08}s`,
-                  height: isPlaying ? '100%' : '4px' // The animation pulse handles the height
+                  background: 'linear-gradient(to top, var(--violet), var(--cyan))',
+                  height: isPlaying ? '100%' : '4px'
                 }}
               />
             ))}
@@ -120,19 +106,16 @@ const MusicPlayer = () => {
             <span className="volume-icon">{volume === 0 ? '🔇' : '🔊'}</span>
             <input 
               type="range" 
-              min="0" 
-              max="1" 
-              step="0.01" 
+              min="0" max="1" step="0.01" 
               value={volume} 
-              onChange={handleVolumeChange}
+              onChange={(e) => updateVolume(parseFloat(e.target.value))}
               className="volume-slider-luxe"
-              onClick={(e) => e.stopPropagation()}
             />
             <span className="volume-perc">{Math.round(volume * 100)}%</span>
           </div>
           
-          <div style={{ marginTop: '1rem', fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', textAlign: 'center', fontWeight: 700 }}>
-            TRACK: DRAMATURGY — EVE (YouTube API)
+          <div style={{ marginTop: '1rem', fontSize: '0.6rem', color: 'var(--violet-light)', textAlign: 'center', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px' }}>
+            TRACKS: DRAMATURGY & SPECIALZ (SHIBUYA PLAYLIST)
           </div>
         </div>
       )}

@@ -19,11 +19,6 @@ const SubCard = ({ sub, delay = 0 }) => {
       {/* GRAPHIC HEADER - FULL IMAGE DISPLAY */}
       <div className="sub-badge-header">
         {sub.image && <img src={sub.image} alt={sub.name} className="sub-badge-img" />}
-        {sub.discount && (
-          <div className="discount-badge">
-            {sub.discount}
-          </div>
-        )}
       </div>
 
       <div className="sub-card-body" style={{ padding: '2rem' }}>

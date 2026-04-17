@@ -44,9 +44,9 @@ const WLCard = ({ card, delay = 0 }) => (
         </ul>
       )}
 
-      <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.03)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ textAlign: 'center' }}>
-          <span style={{ color: 'var(--cyan)', fontSize: '2.4rem', fontWeight: 900, letterSpacing: '-1.5px' }}>{card.price}</span>
+      <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.03)', paddingTop: '2.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="wl-price-tag">
+          {card.price}
         </div>
       </div>
     </div>

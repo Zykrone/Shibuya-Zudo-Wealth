@@ -207,7 +207,7 @@ export const WL_SECTIONS = [
           '/tipeu - rename en Z et lock du pseudo cible',
           '⚠️ Usage responsable requis, évite le harcèlement.',
         ],
-        price: '125 $',
+        price: '125 €',
       },
       {
         name: 'SYS FABULOUS', req: 'Owner requis',
@@ -215,7 +215,7 @@ export const WL_SECTIONS = [
         features: [
           '/fiston - rename Z (rename=ban), si la cible rename elle est ban',
         ],
-        price: '325 $',
+        price: '325 €',
       },
     ],
   },
@@ -229,7 +229,7 @@ export const WL_SECTIONS = [
         name: 'PACK WL VOCAL', req: null,
         desc: "Mute clic droit, move et déco WL.",
         features: [],
-        price: '150 $',
+        price: '150 €',
       },
       {
         name: 'OWNER VOICEMASTER', req: null,
@@ -244,7 +244,7 @@ export const WL_SECTIONS = [
           '=wl - donne la WL à quelqu\'un ou affiche la WL',
           '=pvlist - affiche la liste des salons pv',
         ],
-        price: '200 $',
+        price: '200 €',
       },
       {
         name: 'SYS VOICEMASTER', req: 'Owner requis',
@@ -255,13 +255,13 @@ export const WL_SECTIONS = [
           '=vmall - move tout le salon vers un vocal cible',
           '=follow - permet de suivre quelqu\'un',
         ],
-        price: '300 $',
+        price: '300 €',
       },
       {
         name: 'VOCAL PERSO', req: '@CROWN minimum',
         desc: "Salon vocal perso éditable (nom + permissions).",
         features: [],
-        price: '150 $ + 30 $ / mois',
+        price: '150 € + 30 € / mois',
       },
     ],
   },
@@ -282,7 +282,7 @@ export const WL_SECTIONS = [
           '+pic',
           'og friend',
         ],
-        price: '150 $',
+        price: '150 €',
       },
       {
         name: 'OWNER ROLE', req: 'WL requis',
@@ -295,7 +295,7 @@ export const WL_SECTIONS = [
           '🔆',
           'Roles Perso des C.E.O.',
         ],
-        price: '200 $',
+        price: '200 €',
       },
       {
         name: 'SYS ROLE', req: 'Owner requis',
@@ -307,13 +307,13 @@ export const WL_SECTIONS = [
           '🫧',
           'TOUCHE = BL',
         ],
-        price: '250 $',
+        price: '250 €',
       },
       {
         name: 'ROLE PERSO', req: '@CROWN minimum',
         desc: "Personnalise nom, badge et couleur du rôle.",
         features: [],
-        price: '150 $ + 30 $ / mois',
+        price: '150 € + 30 € / mois',
       },
     ],
   },
@@ -330,7 +330,7 @@ export const WL_SECTIONS = [
           '/blr - retire temporairement le rank staff cible',
           '/unblr - gracie et restaure l\'accès si nécessaire',
         ],
-        price: '150 $',
+        price: '150 €',
       },
       {
         name: 'ROLE GARDIEN (BENDO)', req: null,
@@ -344,7 +344,7 @@ export const WL_SECTIONS = [
           'gérer les pseudos - renommer et gérer les pseudos',
           '⚠️ Perm orientée modération sévère, à utiliser avec contrôle.',
         ],
-        price: '100 $',
+        price: '100 €',
       },
       {
         name: 'SYS GESTION', req: 'Owner requis',
@@ -352,7 +352,7 @@ export const WL_SECTIONS = [
         features: [
           '.ow - owner tools/listing et derank en cas d\'abus',
         ],
-        price: '200 $',
+        price: '200 €',
       },
       {
         name: 'PERM BLACKLIST', req: null,
@@ -361,11 +361,13 @@ export const WL_SECTIONS = [
           '&unbl - seul un owner peut déban une cible blacklist',
           '⚠️ Perm très puissante, à utiliser avec retenue.',
         ],
-        price: '225 $',
+        price: '225 €',
       },
       {
         name: 'SYS JUGE', req: null,
-        price: '600 $',
+        desc: "Accès à la justice suprême du serveur.",
+        features: [],
+        price: '600 €',
       },
     ],
   },

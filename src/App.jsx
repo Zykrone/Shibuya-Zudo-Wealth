@@ -6,6 +6,8 @@ import RolesPage from './pages/Roles';
 import WhitelistPage from './pages/Whitelist';
 import AbonnementsPage from './pages/Abonnements';
 import LoadingScreen from './components/LoadingScreen';
+import CurseEnergy from './components/CurseEnergy';
+import Splash from './components/Splash';
 
 function App() {
   const [page, setPage] = useState('home');
@@ -31,6 +33,8 @@ function App() {
 
   return (
     <>
+      <Splash />
+      <CurseEnergy />
       {isLoading && <LoadingScreen />}
       <div className={isLoading ? 'app-content hidden' : 'app-content fade-in'}>
         <Navbar currentPage={page} setPage={setPage} />

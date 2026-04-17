@@ -20,9 +20,8 @@ const Navbar = ({ currentPage, setPage }) => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-brand" onClick={() => setPage('home')}>
-        <span style={{ fontSize: '1.5rem', filter: 'drop-shadow(0 0 10px var(--cyan))' }}>⚡</span>
-        <span style={{ background: 'linear-gradient(90deg, #fff, rgba(255,255,255,0.5))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Zudo Wealth
+        <span style={{ background: 'linear-gradient(90deg, #fff, rgba(255,255,255,0.5))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '1.4rem' }}>
+          SHIBUYA ZUDO
         </span>
       </div>
 
