@@ -23,6 +23,7 @@ const MusicPlayer = () => {
 
   const unmute = () => {
     iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute' }), '*');
+    iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [30] }), '*');
     setIsMuted(false);
     setIsPlaying(true);
   };
