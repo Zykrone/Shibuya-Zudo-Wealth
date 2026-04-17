@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SUBSCRIPTIONS } from '../data';
 
 const TIER_LABELS = {
@@ -10,11 +10,19 @@ const TIER_LABELS = {
   opal:    { label: 'GODLY', color: '#a78bfa' },
 };
 
-const SubCard = ({ sub, delay = 0 }) => {
+const SubCard = ({ sub, delay = 0, isZoomed, onClick }) => {
   const meta = TIER_LABELS[sub.colorClass] || {};
   return (
-    <div id={`sub-${sub.id}`} className={`sub-card cursed-card ${sub.colorClass} ${sub.featured ? 'featured' : ''}`} 
-         style={{ animationDelay: `${delay}s` }}>
+    <div 
+      id={`sub-${sub.id}`} 
+      className={`sub-card cursed-card ${sub.colorClass} ${sub.featured ? 'featured' : ''} ${isZoomed ? 'zoomed' : ''}`} 
+      style={{ 
+        animationDelay: `${delay}s`,
+        cursor: 'pointer',
+        '--card-color': meta.color // For CSS access
+      }}
+      onClick={onClick}
+    >
       
       {/* GRAPHIC HEADER - FULL IMAGE DISPLAY */}
       <div className="sub-badge-header">
@@ -96,9 +104,14 @@ const SubCard = ({ sub, delay = 0 }) => {
 };
 
 const AbonnementsPage = () => {
+  const [zoomedId, setZoomedId] = useState(null);
+
   const scrollToSub = (id) => {
     const el = document.getElementById(`sub-${id}`);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setZoomedId(id);
+    }
   };
 
   return (
@@ -118,9 +131,15 @@ const AbonnementsPage = () => {
           </p>
         </div>
 
-        <div className="subs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '3rem', marginBottom: '8rem' }}>
+        <div className={`subs-grid ${zoomedId ? 'has-zoomed' : ''}`} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '3rem', marginBottom: '8rem' }}>
           {SUBSCRIPTIONS.map((sub, i) => (
-            <SubCard key={sub.id} sub={sub} delay={i * 0.1} />
+            <SubCard 
+              key={sub.id} 
+              sub={sub} 
+              delay={i * 0.1} 
+              isZoomed={zoomedId === sub.id}
+              onClick={() => setZoomedId(zoomedId === sub.id ? null : sub.id)}
+            />
           ))}
         </div>
 
