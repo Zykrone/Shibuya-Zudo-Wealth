@@ -12,36 +12,40 @@ const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-brand jjk-heading" onClick={triggerDomainExpansion} style={{ cursor: 'pointer' }}>
-        <span style={{ fontSize: '1.4rem' }}>
-          SHIBUYA ZUDO
-        </span>
-      </div>
+    <nav className={`navbar-luxe ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
+        <div className="navbar-brand-luxe" onClick={triggerDomainExpansion}>
+          <div className="brand-icon-wrap">
+            <span className="brand-dot"></span>
+          </div>
+          <span className="brand-text">SHIBUYA <span className="text-cyan">ZUDO</span></span>
+        </div>
 
-      <div className="navbar-nav">
-        {NAV_ITEMS.map(item => (
-          <button
-            key={item.id}
-            className={`nav-btn ${currentPage === item.id ? 'active' : ''}`}
-            onClick={() => {
-              setPage(item.id);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+        <div className="navbar-links-center">
+          {NAV_ITEMS.map(item => (
+            <button
+              key={item.id}
+              className={`nav-link-modern ${currentPage === item.id ? 'active' : ''}`}
+              onClick={() => {
+                setPage(item.id);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-link-text">{item.label}</span>
+              <div className="nav-link-indicator"></div>
+            </button>
+          ))}
+        </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-        <MusicPlayer />
+        <div className="navbar-actions-right">
+          <MusicPlayer />
+        </div>
       </div>
     </nav>
   );

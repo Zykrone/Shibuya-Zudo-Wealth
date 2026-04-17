@@ -43,24 +43,29 @@ const AdminPanel = () => {
   ];
 
   return (
-    <div className="admin-glass-container">
+    <div className="admin-page-wrapper">
       <div className="page-bg" />
       
-      <div className="admin-glass-panel">
-        <header className="admin-glass-header">
-          <div className="admin-title-wrap">
-            <span className="admin-neon-dot"></span>
-            <h1>PANEL <span className="text-gradient-purple">PRIVÉ</span></h1>
+      <div className="admin-glass-container-luxe">
+        <header className="admin-header-modern">
+          <div className="admin-brand-wrap">
+            <div className="admin-neon-orb" />
+            <div className="admin-titles">
+              <h1>SYSTEM <span className="text-cyan">OVERRIDE</span></h1>
+              <p>PANEL D'ADMINISTRATION SUPRÊME</p>
+            </div>
           </div>
-          <nav className="admin-glass-nav">
+          
+          <nav className="admin-tabs-modern">
             {adminTabs.map(tab => (
               <button 
                 key={tab.id} 
-                className={`admin-glass-btn ${activeTab === tab.id ? 'active' : ''}`} 
+                className={`admin-tab-btn ${activeTab === tab.id ? 'active' : ''}`} 
                 onClick={() => setActiveTab(tab.id)}
               >
                 <span className="tab-icon">{tab.icon}</span>
                 <span className="tab-label">{tab.label}</span>
+                <div className="tab-indicator" />
               </button>
             ))}
           </nav>

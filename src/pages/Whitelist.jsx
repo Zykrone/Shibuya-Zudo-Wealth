@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { WL_SECTIONS } from '../data';
 import { useDiscount } from '../context/DiscountContext';
 import { calculateWLPrice } from '../utils/pricing';
+import PriceDisplay from '../components/PriceDisplay';
 
 const WLCard = ({ card, delay = 0 }) => {
   const { discounts } = useDiscount();
@@ -27,9 +28,21 @@ const WLCard = ({ card, delay = 0 }) => {
   return (
     <div 
       ref={cardRef}
-      className="wl-card-modern" 
-      style={{ animationDelay: `${delay}s` }}
+      className={`wl-card-modern ${pricing.hasDiscount ? 'discounted' : ''}`}
+      style={{ animationDelay: `${delay}s`, position: 'relative' }}
     >
+      {pricing.hasDiscount && (
+        <>
+          <div className="cursed-flame-wrap">
+            <div className="cursed-flame"></div>
+          </div>
+          <div className="global-discount-badge">
+            <span className="reduction-label">RÉDUCTION</span>
+            -{pricing.discountPercent}%
+          </div>
+        </>
+      )}
+
       {/* Badge pré-requis flottant */}
       {card.req && (
         <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10 }}>
@@ -105,24 +118,12 @@ const WLCard = ({ card, delay = 0 }) => {
 
       {/* Modern Price Tag */}
       <div className="modern-price-tag">
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-          {pricing.hasDiscount && (
-            <span style={{ textDecoration: 'line-through', opacity: 0.3, fontSize: '1.2rem', color: '#fff', fontWeight: 800 }}>
-              {pricing.original}
-            </span>
-          )}
-          <div className="price-glow-btn">
-            {pricing.final}
-          </div>
-          {pricing.hasDiscount && (
-            <span style={{
-              background: 'var(--cyan)', color: '#000', padding: '0.3rem 0.8rem',
-              borderRadius: '8px', fontSize: '0.75rem', fontWeight: 950, marginTop: '0.5rem'
-            }}>
-              OFFRE LIMITÉE -{pricing.discountPercent}%
-            </span>
-          )}
-        </div>
+        <PriceDisplay 
+          original={pricing.original} 
+          final={pricing.final} 
+          hasDiscount={pricing.hasDiscount}
+          size="large"
+        />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import LoadingScreen from './components/LoadingScreen';
 import CurseEnergy from './components/CurseEnergy';
 import Splash from './components/Splash';
 import AdminPanel from './pages/AdminPanel';
+import NinjaAdmin from './components/NinjaAdmin';
 import { DiscountProvider } from './context/DiscountContext';
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <div className={`app-content ${isLoading ? 'hidden' : ''} ${isDomainExpanding ? 'shattering-app' : ''}`}>
           <Navbar currentPage={page} setPage={setPage} triggerDomainExpansion={triggerDomainExpansion} />
           {renderPage()}
+          <NinjaAdmin setPage={setPage} />
         </div>
       </>
     </DiscountProvider>

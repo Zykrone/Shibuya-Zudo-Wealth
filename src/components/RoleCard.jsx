@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ROLES } from '../data';
 import { useDiscount } from '../context/DiscountContext';
 import { calculateRolePrice } from '../utils/pricing';
+import PriceDisplay from './PriceDisplay';
 
 /* Retourne les rôles inférieurs (source des héritages) pour un rôle donné */
 const getInheritedRoles = (role) => {
@@ -29,10 +30,22 @@ const RoleCard = ({ role, delay = 0 }) => {
     <>
       {/* ───── CARTE ───── */}
       <div
-        className="role-card-premium"
-        style={{ animationDelay: `${delay}s` }}
+        className={`role-card-premium ${pricing.hasDiscount ? 'discounted' : ''}`}
+        style={{ animationDelay: `${delay}s`, position: 'relative' }}
         onClick={() => setShowModal(true)}
       >
+        {pricing.hasDiscount && (
+          <>
+            <div className="cursed-flame-wrap">
+              <div className="cursed-flame"></div>
+            </div>
+            <div className="global-discount-badge">
+              <span className="reduction-label">RÉDUCTION</span>
+              -{pricing.discountPercent}%
+            </div>
+          </>
+        )}
+
         <div className="role-card-glow" style={{ background: role.permColor }} />
 
         <div className="role-card-header">
@@ -46,15 +59,12 @@ const RoleCard = ({ role, delay = 0 }) => {
         <div className="role-card-content">
           <h3 className="role-name">{role.name}</h3>
           <div className="role-price-tag">
-            {pricing.hasDiscount ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: '0.8em' }}>{pricing.original}€</span>
-                <span style={{ color: 'var(--cyan)' }}>{pricing.final}€</span>
-                <span style={{ fontSize: '0.6em', background: 'var(--cyan)', color: '#000', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 900 }}>-{pricing.discountPercent}%</span>
-              </div>
-            ) : (
-              <span>{pricing.final}{isPriced ? ' €' : ''}</span>
-            )}
+            <PriceDisplay 
+              original={pricing.original} 
+              final={pricing.final} 
+              hasDiscount={pricing.hasDiscount}
+              size="small"
+            />
           </div>
         </div>
 
@@ -212,17 +222,21 @@ const RoleCard = ({ role, delay = 0 }) => {
 
             {/* FOOTER */}
             <div className="modal-footer-luxe">
-              <div className="footer-price" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                {pricing.hasDiscount ? (
-                  <>
-                    <span style={{ textDecoration: 'line-through', opacity: 0.4, fontSize: '1.2rem', color: '#fff' }}>{pricing.original}€</span>
-                    <span>{pricing.final}€</span>
-                    <span style={{ fontSize: '0.8rem', background: 'var(--cyan)', color: '#000', padding: '0.2rem 0.6rem', borderRadius: '6px', fontWeight: 950 }}>-{pricing.discountPercent}%</span>
-                  </>
-                ) : (
-                  <span>{role.price} {isPriced ? '€' : ''}</span>
-                )}
-                <span style={{ fontSize: '0.8rem', opacity: 0.5, fontWeight: 500, marginLeft: '1rem' }}>PAIEMENT UNIQUE</span>
+              <div className="footer-price" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                  <PriceDisplay 
+                    original={pricing.original} 
+                    final={pricing.final} 
+                    hasDiscount={pricing.hasDiscount}
+                    size="medium"
+                  />
+                  {pricing.hasDiscount && (
+                    <div className="global-discount-badge" style={{ position: 'static', transform: 'none', animation: 'none' }}>
+                      -{pricing.discountPercent}% RÉDUCTION
+                    </div>
+                  )}
+                </div>
+                <span style={{ fontSize: '0.8rem', opacity: 0.5, fontWeight: 800, letterSpacing: '2px' }}>PAIEMENT UNIQUE</span>
               </div>
             </div>
 
