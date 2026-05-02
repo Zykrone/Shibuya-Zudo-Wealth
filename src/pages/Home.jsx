@@ -18,7 +18,7 @@ const Home = ({ setPage }) => {
       }}>
         {/* Video + overlay */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <VideoBackground videoId="lm47T73ARgI" opacity={0.45} />
+          <VideoBackground videoId="lm47T73ARgI" opacity={0.45} start={10} />
           <div style={{
             position: 'absolute', inset: 0,
             background: 'radial-gradient(ellipse at center top, rgba(124,58,237,0.25) 0%, rgba(5,4,10,0.9) 70%)',
