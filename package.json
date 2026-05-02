@@ -2,12 +2,15 @@
   "name": "shibuya-invest",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://Zykrone.github.io/Shibuya-Zudo-Wealth/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "start:fullstack": "concurrently \"node server/server.js\" \"vite\"",
     "build": "vite build",
     "lint": "eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,8 +33,8 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "gh-pages": "^6.3.0",
     "globals": "^17.4.0",
     "vite": "^8.0.4"
   }
 }
-

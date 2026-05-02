@@ -45,7 +45,7 @@ const WLCard = ({ card, delay = 0 }) => {
 
       {/* Badge pré-requis flottant */}
       {card.req && (
-        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10 }}>
+        <div style={{ position: 'absolute', top: '4.5rem', right: '1.5rem', zIndex: 10 }}>
           <span style={{
             padding: '0.4rem 1rem', borderRadius: '100px',
             background: 'rgba(6,182,212,0.1)', color: 'var(--cyan)',
