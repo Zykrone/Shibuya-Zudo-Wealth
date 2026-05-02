@@ -389,7 +389,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'silver', tier: 'ENTRY', name: 'SILVER INVEST', 
     price: '14,99', oldPrice: '19,99€', discount: '-25%', colorClass: 'silver',
-    image: '/badges/silver.png',
+    image: `${import.meta.env.BASE_URL}badges/silver.png`,
     featured: false,
     label: 'ABONNEMENT MENSUEL',
     avantages: [
@@ -403,7 +403,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'gold', tier: 'STANDARD+', name: 'GOLD INVEST', 
     price: '29,99', oldPrice: '39,99€', discount: '-25%', colorClass: 'gold',
-    image: '/badges/gold.png',
+    image: `${import.meta.env.BASE_URL}badges/gold.png`,
     featured: true,
     label: 'ABONNEMENT MENSUEL',
     avantages: [
@@ -417,7 +417,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'platinum', tier: 'CORE', name: 'PLATINUM INVEST', 
     price: '44,99', oldPrice: '59,99€', discount: '-25%', colorClass: 'platinum',
-    image: '/badges/plat.png',
+    image: `${import.meta.env.BASE_URL}badges/plat.png`,
     featured: false,
     label: 'ABONNEMENT MENSUEL',
     avantages: [
@@ -434,7 +434,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'diamond', tier: 'ROYAL+', name: 'DIAMOND INVEST', 
     price: '74,99', oldPrice: '99,99€', discount: '-25%', colorClass: 'diamond',
-    image: '/badges/diams.png',
+    image: `${import.meta.env.BASE_URL}badges/diams.png`,
     featured: false,
     label: 'ABONNEMENT MENSUEL',
     avantages: [
@@ -452,7 +452,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'ruby', tier: 'RUBY', name: 'RUBY INVEST', 
     price: '149,99', oldPrice: '199,99€', discount: '-25%', colorClass: 'ruby',
-    image: '/badges/ruby.png',
+    image: `${import.meta.env.BASE_URL}badges/ruby.png`,
     featured: false,
     subtitle: '(LIMITED, CROWN+)',
     label: 'ABONNEMENT MENSUEL',
@@ -471,7 +471,7 @@ export const SUBSCRIPTIONS = [
   {
     id: 'opal', tier: 'OPAL', name: 'OPAL INVEST', 
     price: '299,99', oldPrice: '399,99€', discount: '-25%', colorClass: 'opal',
-    image: '/badges/opal.png',
+    image: `${import.meta.env.BASE_URL}badges/opal.png`,
     featured: false,
     subtitle: '(LIMITED, BOT = BOT+)',
     label: 'ABONNEMENT MENSUEL',
