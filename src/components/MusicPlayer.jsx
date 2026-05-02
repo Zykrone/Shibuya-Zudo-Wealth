@@ -67,7 +67,16 @@ const MusicPlayer = () => {
         ref={iframeRef}
         id="yt-player-frame"
         src={`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${playlistParam}&controls=0&modestbranding=1&rel=0&origin=${window.location.origin}`}
-        style={{ position: 'absolute', top: '-1000px', left: '-1000px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }}
+        style={{ 
+          position: 'fixed', 
+          top: '-100px', 
+          left: '-100px', 
+          width: '1px', 
+          height: '1px', 
+          opacity: 0, 
+          pointerEvents: 'none',
+          zIndex: -1000 
+        }}
         title="Music Player"
         allow="autoplay; encrypted-media"
       />

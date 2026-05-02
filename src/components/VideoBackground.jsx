@@ -1,17 +1,33 @@
 import React from 'react';
 
-const VideoBackground = ({ videoId, opacity = 0.4, start = 0 }) => {
+const VideoBackground = ({ videoId, src, opacity = 0.4 }) => {
+  // On force le chemin local. Même si un videoId est passé par erreur, on l'ignore.
+  const localSrc = src || "/jjk_shibuya_bg.mp4";
+
   return (
-    <div className="video-background-container">
-      <div className="video-overlay" style={{ opacity: 1 - opacity }} />
-      <iframe
+    <div className="video-background-container" style={{ pointerEvents: 'none' }}>
+      <div className="video-overlay" style={{ opacity: 1 - opacity, zIndex: 1 }} />
+      <video
+        key={localSrc}
         className="video-iframe"
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1${start ? `&start=${start}` : ''}`}
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        title="Background Video"
-      />
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{ 
+          objectFit: 'cover', 
+          width: '100vw', 
+          height: '100vh',
+          display: 'block',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 0
+        }}
+      >
+        <source src={localSrc} type="video/mp4" />
+      </video>
     </div>
   );
 };
