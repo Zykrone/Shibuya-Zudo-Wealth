@@ -99,6 +99,18 @@ const Splash = ({ onEnter }) => {
           <p className="splash-subtitle-glitch">
             L'EMPIRE DE L'INFLUENCE & DE L'ÉQUILIBRE
           </p>
+          <div className="splash-signature" style={{ 
+            animation: 'fadeIn 2s ease-out 1s both',
+            fontSize: '0.7rem',
+            letterSpacing: '3px',
+            opacity: 0.4,
+            marginTop: '1.5rem',
+            color: '#fff',
+            textTransform: 'uppercase',
+            fontWeight: 700
+          }}>
+            fais par Zykrøne ✧
+          </div>
         </div>
         
         <div className="enter-btn-wrap-luxe" onClick={handleEnter}>

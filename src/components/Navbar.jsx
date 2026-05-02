@@ -24,7 +24,20 @@ const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
           <div className="brand-icon-wrap">
             <span className="brand-dot"></span>
           </div>
-          <span className="brand-text">SHIBUYA <span className="text-cyan">ZUDO</span></span>
+          <span className="brand-text">
+            SHIBUYA <span className="text-cyan">ZUDO</span>
+            <span className="brand-signature" style={{ 
+              display: 'block', 
+              fontSize: '0.6rem', 
+              fontWeight: 400, 
+              letterSpacing: '2px', 
+              opacity: 0.5, 
+              marginTop: '2px',
+              color: 'var(--text-muted)'
+            }}>
+              fais par Zykrøne ✧
+            </span>
+          </span>
         </div>
 
         <div className="navbar-links-center">
