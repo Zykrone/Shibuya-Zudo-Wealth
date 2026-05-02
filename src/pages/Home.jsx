@@ -18,7 +18,7 @@ const Home = ({ setPage }) => {
       }}>
         {/* Video + overlay */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <VideoBackground src="/jjk_shibuya_bg.mp4" opacity={0.6} />
+          <VideoBackground src={`${import.meta.env.BASE_URL}jjk_shibuya_bg.mp4`} opacity={0.6} />
           <div style={{
             position: 'absolute', inset: 0,
             background: 'radial-gradient(ellipse at center top, rgba(124,58,237,0.25) 0%, rgba(5,4,10,0.9) 70%)',

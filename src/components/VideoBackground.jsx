@@ -3,7 +3,7 @@ import React from 'react';
 const VideoBackground = ({ videoId, src, opacity = 0.4 }) => {
   console.log("--- SHIBUYA DEBUG: VideoBackground Rendering (Local Only Mode) ---");
   // On force le chemin local. Même si un videoId est passé par erreur, on l'ignore.
-  const localSrc = src || "/jjk_shibuya_bg.mp4";
+  const localSrc = src || `${import.meta.env.BASE_URL}jjk_shibuya_bg.mp4`;
 
   return (
     <div className="video-background-container" style={{ pointerEvents: 'none' }}>

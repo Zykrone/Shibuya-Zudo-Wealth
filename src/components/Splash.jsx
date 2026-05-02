@@ -80,7 +80,7 @@ const Splash = ({ onEnter }) => {
         className="parallax-layer parallax-bg"
         style={{ transform: `scale(1.1) translate(${mousePos.x * -1}px, ${mousePos.y * -1}px)` }}
       >
-        <VideoBackground src="/jjk_shibuya_bg.mp4" opacity={0.6} />
+        <VideoBackground src={`${import.meta.env.BASE_URL}jjk_shibuya_bg.mp4`} opacity={0.6} />
         <div className="splash-bg-overlay" />
       </div>
 
