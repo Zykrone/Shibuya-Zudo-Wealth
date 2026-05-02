@@ -10,6 +10,7 @@ const NAV_ITEMS = [
 
 const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -17,10 +18,16 @@ const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (id) => {
+    setPage(id);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <nav className={`navbar-luxe ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar-luxe ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-brand-luxe" onClick={triggerDomainExpansion}>
+        <div className="navbar-brand-luxe" onClick={() => { triggerDomainExpansion(); setIsMobileMenuOpen(false); }}>
           <div className="brand-icon-wrap">
             <span className="brand-dot"></span>
           </div>
@@ -40,15 +47,19 @@ const Navbar = ({ currentPage, setPage, triggerDomainExpansion }) => {
           </span>
         </div>
 
-        <div className="navbar-links-center">
+        {/* Mobile Toggle */}
+        <button className="mobile-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </button>
+
+        <div className={`navbar-links-center ${isMobileMenuOpen ? 'show' : ''}`}>
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
               className={`nav-link-modern ${currentPage === item.id ? 'active' : ''}`}
-              onClick={() => {
-                setPage(item.id);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onClick={() => handleNavClick(item.id)}
             >
               <span className="nav-link-text">{item.label}</span>
               <div className="nav-link-indicator"></div>

@@ -432,3 +432,85 @@ h1,h2,h3,h4,h5 { font-family: var(--font-heading); letter-spacing: -0.02em; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: var(--violet-dark); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--violet); }
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+.mobile-toggle { display: none; }
+
+@media (max-width: 1024px) {
+  .splash-title-ultra { font-size: 4rem; letter-spacing: 10px; }
+  .hero-title { font-size: 5rem !important; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 1.5rem; }
+  
+  /* Navbar Mobile */
+  .mobile-toggle {
+    display: flex; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; z-index: 1001;
+  }
+  .mobile-toggle .bar {
+    width: 25px; height: 2px; background: #fff; transition: 0.3s;
+  }
+  .mobile-menu-open .mobile-toggle .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-open .mobile-toggle .bar:nth-child(2) { opacity: 0; }
+  .mobile-menu-open .mobile-toggle .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  
+  .navbar-links-center {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+    background: rgba(5, 4, 10, 0.98); backdrop-filter: blur(20px);
+    flex-direction: column; justify-content: center; gap: 2rem;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1000;
+  }
+  .navbar-links-center.show { right: 0; }
+  .nav-link-modern { font-size: 1.5rem; }
+  
+  /* Hero / Home */
+  .hero-title { font-size: 3.5rem !important; letter-spacing: -2px !important; }
+  .hero-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-eyebrow { font-size: 0.7rem; }
+  
+  /* Splash */
+  .splash-title-ultra { font-size: 2.5rem; letter-spacing: 5px; flex-direction: column; gap: 0.5rem; }
+  .splash-subtitle-glitch { font-size: 0.7rem; letter-spacing: 5px; }
+  .enter-btn-epic { padding: 1.5rem 3rem; }
+  
+  /* Grids */
+  .roles-grid, .subs-grid { grid-template-columns: 1fr !important; }
+  .price-table-wrap { overflow-x: auto; }
+  .price-table { min-width: 600px; }
+  
+  .sub-card, .role-card-premium { max-width: 100%; }
+  
+  /* Modal */
+  .modal-box, .modal-content { width: 95% !important; padding: 1.5rem !important; }
+  .modal-title-row { flex-direction: column; align-items: center; text-align: center; }
+  .modal-stats-row { grid-template-columns: 1fr; gap: 1rem; }
+  .rc-new-sections { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.5rem !important; }
+  .navbar-brand-luxe .brand-text { font-size: 0.9rem; letter-spacing: 1px; }
+  .brand-signature { font-size: 0.5rem !important; }
+  .music-overlay-hint { right: 1rem; bottom: 80px; }
+  .hint-content { padding: 0.6rem 1rem; }
+  
+  .music-btn-text { display: none; }
+  .music-state-label { font-size: 0.6rem; }
+  .navbar-actions-right { flex-shrink: 0; }
+  .music-main-btn { padding: 0.4rem 0.8rem; }
+}
+
+@media (max-width: 768px) {
+  .wl-card-modern, .sub-card, .role-card-premium { width: 100% !important; min-width: 0 !important; }
+  .page-hero h1 { font-size: 3rem !important; }
+  .page-hero p { font-size: 1rem !important; }
+  .section-header h2 { font-size: 2rem !important; }
+  .offers-grid { grid-template-columns: 1fr !important; }
+  
+  /* Specific grid overrides for pages */
+  [style*=" grid-template-columns\] { grid-template-columns: 1fr !important; }
+}
