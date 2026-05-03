@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/Shibuya-Zudo-Wealth/',
   plugins: [react()],
   server: {
+    host: true,
     port: 5173,
     proxy: {
       // Toutes les requêtes qui commencent par /api sont renvoyées au backend sur le port 3000
