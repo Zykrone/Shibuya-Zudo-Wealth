@@ -25,49 +25,23 @@ const Home = ({ setPage }) => {
 
         {/* Contenu hero */}
         <div className="container hero-content" style={{ zIndex: 5 }}>
-          {/* Badge eyebrow */}
-          <div className="hero-badge">
-            <span className="hero-badge-icon">⚡</span>
-            L'EMPIRE DE L'INFLUENCE
-          </div>
-
           {/* Titre principal */}
           <h1 className="hero-title-main" style={{ textShadow: '0 0 40px rgba(124, 58, 237, 0.4), 0 10px 40px rgba(0,0,0,0.8)' }}>
             SHIBUYA ZUDO<br />
             <span className="hero-title-outline">WEALTH</span>
           </h1>
 
-          {/* Description */}
-          <p className="hero-description">
-            L'apogée du prestige. Dominez avec des privilèges absolus et une autorité incontestée.
-            La fusion parfaite entre technologie et influence.
-          </p>
-
           {/* CTA Buttons */}
           <div className="hero-cta-group">
-            <button className="home-cta-btn home-cta-primary" onClick={() => { setPage('roles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              <span>⚔️</span> Rôles
+            <button className="home-cta-btn btn-jjk btn-jjk-roles" onClick={() => { setPage('roles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <span className="btn-icon">⚔️</span> Rôles
             </button>
-            <button className="home-cta-btn home-cta-primary" onClick={() => { setPage('whitelist'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              <span>🛡️</span> Whitelist
+            <button className="home-cta-btn btn-jjk btn-jjk-wl" onClick={() => { setPage('whitelist'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <span className="btn-icon">🛡️</span> Whitelist
             </button>
-            <button className="home-cta-btn home-cta-primary" onClick={() => { setPage('abonnements'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              <span>💎</span> Abonnements
+            <button className="home-cta-btn btn-jjk btn-jjk-subs" onClick={() => { setPage('abonnements'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <span className="btn-icon">💎</span> Abonnements
             </button>
-          </div>
-
-          {/* Stats row */}
-          <div className="hero-stats-row">
-            {[
-              { val: totalRoles, label: 'Rôles Exclusifs' },
-              { val: totalWL, label: 'Modules Whitelist' },
-              { val: SUBSCRIPTIONS.length, label: 'Abonnements' },
-            ].map((s, i) => (
-              <div key={i} className="stat-card">
-                <div className="stat-value">{s.val}+</div>
-                <div className="stat-label">{s.label}</div>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -169,14 +143,14 @@ const Home = ({ setPage }) => {
         </div>
 
         <div className="section-footer-cta">
-          <button className="home-cta-btn home-cta-primary" onClick={() => { setPage('whitelist'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-            Découvrir toute la Whitelist
+          <button className="home-cta-btn btn-jjk btn-jjk-wl" onClick={() => { setPage('whitelist'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+            <span className="btn-icon">🛡️</span> Découvrir toute la Whitelist
           </button>
         </div>
       </section>
 
       {/* ── SECTION 3: L'ASCENSION ULTIME (CALL TO ACTION) ── */}
-      <section className="home-section container" style={{ position: 'relative', zIndex: 10, padding: '6rem 1.5rem 10rem' }}>
+      <section className="home-section container" style={{ position: 'relative', zIndex: 10, padding: '4rem 1.5rem 6rem' }}>
         <div className="ascension-card">
           <div className="ascension-orb-1" />
           <div className="ascension-orb-2" />
@@ -185,11 +159,11 @@ const Home = ({ setPage }) => {
             Le domaine de Shibuya n'attend que votre signature. Choisissez votre ascension et régnez aux côtés des fondateurs dès aujourd'hui.
           </p>
           <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="home-cta-btn home-cta-primary" style={{ margin: 0 }} onClick={() => { setPage('roles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              ⚔️ Rôles Occultes
+            <button className="home-cta-btn btn-jjk btn-jjk-roles" style={{ margin: 0 }} onClick={() => { setPage('roles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <span className="btn-icon">⚔️</span> Rôles Occultes
             </button>
-            <button className="home-cta-btn home-cta-primary" style={{ margin: 0 }} onClick={() => { setPage('abonnements'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-              💎 Abonnements
+            <button className="home-cta-btn btn-jjk btn-jjk-subs" style={{ margin: 0 }} onClick={() => { setPage('abonnements'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+              <span className="btn-icon">💎</span> Abonnements
             </button>
           </div>
         </div>

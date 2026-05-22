@@ -2070,6 +2070,136 @@ input:checked+.neon-slider:before {
   box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
 }
 
+/* ==============================
+   JJK PREMIUM INTERACTIVE BUTTONS
+   ============================== */
+
+/* Base JJK button — glassmorphism + overflow for the slash shimmer */
+.btn-jjk {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    background 0.35s ease,
+    border-color 0.35s ease;
+  z-index: 0;
+}
+
+/* Diagonal shimmer overlay (always present, slides on hover) */
+.btn-jjk::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -100%;
+  width: 55%;
+  height: 220%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  transition: none;
+  z-index: 1;
+}
+
+.btn-jjk:hover::before {
+  animation: btnGlint 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes btnGlint {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Neon aura bloom behind (pseudo-element via box-shadow on hover) */
+.btn-jjk .btn-icon {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn-jjk:hover .btn-icon {
+  animation: iconBounce 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes iconBounce {
+  0%   { transform: scale(1) rotate(0deg); }
+  40%  { transform: scale(1.4) rotate(-10deg); }
+  70%  { transform: scale(0.9) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 3D physical press on click */
+.btn-jjk:active {
+  transform: scale(0.96) translateY(2px) !important;
+  transition: transform 0.08s ease;
+}
+
+/* ── Variant : RÔLES (Violet occulte) ── */
+.btn-jjk-roles {
+  border-color: rgba(124, 58, 237, 0.5);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.18) 0%, rgba(90, 30, 200, 0.1) 100%);
+  text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+  box-shadow:
+    0 0 0px rgba(124, 58, 237, 0),
+    inset 0 0 15px rgba(124, 58, 237, 0.08);
+}
+.btn-jjk-roles:hover {
+  transform: translateY(-5px) scale(1.05);
+  border-color: var(--violet);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.35) 0%, rgba(90, 30, 200, 0.2) 100%);
+  box-shadow:
+    0 0 30px rgba(124, 58, 237, 0.55),
+    0 12px 35px rgba(124, 58, 237, 0.3),
+    inset 0 0 20px rgba(124, 58, 237, 0.15);
+  text-shadow: 0 0 14px rgba(167, 139, 250, 0.8);
+}
+
+/* ── Variant : WHITELIST (Cyan / Shield) ── */
+.btn-jjk-wl {
+  border-color: rgba(6, 182, 212, 0.45);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.14) 0%, rgba(3, 120, 150, 0.08) 100%);
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
+  box-shadow:
+    0 0 0px rgba(6, 182, 212, 0),
+    inset 0 0 15px rgba(6, 182, 212, 0.06);
+}
+.btn-jjk-wl:hover {
+  transform: translateY(-5px) scale(1.05);
+  border-color: var(--cyan);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(3, 120, 150, 0.18) 100%);
+  box-shadow:
+    0 0 30px rgba(6, 182, 212, 0.55),
+    0 12px 35px rgba(6, 182, 212, 0.3),
+    inset 0 0 20px rgba(6, 182, 212, 0.12);
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.85);
+}
+
+/* ── Variant : ABONNEMENTS (Or / Diamant) ── */
+.btn-jjk-subs {
+  border-color: rgba(251, 191, 36, 0.45);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.14) 0%, rgba(180, 110, 0, 0.08) 100%);
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.35);
+  box-shadow:
+    0 0 0px rgba(251, 191, 36, 0),
+    inset 0 0 15px rgba(251, 191, 36, 0.06);
+}
+.btn-jjk-subs:hover {
+  transform: translateY(-5px) scale(1.05);
+  border-color: #fbbf24;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(180, 110, 0, 0.18) 100%);
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.55),
+    0 12px 35px rgba(251, 191, 36, 0.3),
+    inset 0 0 20px rgba(251, 191, 36, 0.12);
+  text-shadow: 0 0 14px rgba(251, 191, 36, 0.85);
+}
+
 @keyframes scrollBounce {
 
   0%,
