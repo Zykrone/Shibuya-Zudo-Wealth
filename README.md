@@ -1,7 +1,7 @@
 # <p align="center">⛩️ SHIBUYA ZUDO WEALTH 🏯</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Créateur-Zykrone-purple?style=for-the-badge&logo=github" alt="Zykrone">
+  <img src="https://img.shields.io/badge/Créateur-Zykrøne-purple?style=for-the-badge&logo=github" alt="Zykrøne">
   <img src="https://img.shields.io/badge/Status-Live_&_Secure-success?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/UI-Domain_Expansion_Glassmorphism-cyan?style=for-the-badge" alt="UI">
 </p>
@@ -14,7 +14,7 @@
 
 ## 🌌 LE CONCEPT
 
-**Shibuya Zudo Wealth** est une plateforme haut de gamme d'investissement et d'acquisition de privilèges, conçue et érigée par **Zykrone**. 
+**Shibuya Zudo Wealth** est une plateforme haut de gamme d'investissement et d'acquisition de privilèges, conçue et érigée par **Zykrøne**. 
 
 Inspirée par l'esthétique sombre, mystique et électrique de *Jujutsu Kaisen*, elle plonge l'utilisateur dans une **Extension du Domaine** visuelle et sonore unique, mariant des technologies web modernes et une interface utilisateur ultra-premium.
 
@@ -37,6 +37,6 @@ Inspirée par l'esthétique sombre, mystique et électrique de *Jujutsu Kaisen*,
 ---
 
 <p align="center">
-  <i>Développé et sécurisé par <b>Zykrone</b>.</i><br>
+  <i>Développé et sécurisé par <b>Zykrøne</b>.</i><br>
   <b>"Le domaine est désormais vôtre."</b>
 </p>
